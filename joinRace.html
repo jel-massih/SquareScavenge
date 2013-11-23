@@ -1,6 +1,6 @@
 <?php
-  include('config.php');
-global $collection;
+  include('inc/config.php');
+  global $collection;
   $cursor = $collection->find();
   $array = iterator_to_array($cursor);
 ?>
@@ -16,9 +16,9 @@ global $collection;
     <title>Square Scavenge</title>
 
     <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
-    <link href="starter-template.css" rel="stylesheet">
+    <link href="css/starter-template.css" rel="stylesheet">
 
   </head>
 

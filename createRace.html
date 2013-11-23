@@ -11,41 +11,38 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/signin.css" rel="stylesheet">
 
-    <link href="starter-template.css" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
+    <link href="css/starter-template.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
     <script src="js/jquery.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script>
-          
-      
+      var map;
+      var markers = [];
+      var activeWindow = null;
+      var locations = [];
 
-       var map;
-        var markers = [];
-        var activeWindow = null;
-        var locations = [];
+      function addMarker(lat, lng, title, loc_id) {
+      markers.push(new google.maps.Marker({
+        map: map,
+        position: new google.maps.LatLng(lat, lng),
+        title: title
+      }));
 
-       function addMarker(lat, lng, title, loc_id) {
-        markers.push(new google.maps.Marker({
-            map: map,
-            position: new google.maps.LatLng(lat, lng),
-            title: title
-        }));
-
-var html = "<h4>"+title+"</h4><table>" +
+      var html = "<h4>"+title+"</h4><table>" +
                  "<input type='hidden' id='loc_id' value="+loc_id+"/>" +
                  "<tr><td>Clue:</td> <td><input type='text' id='clue'/></td> </tr>" +
                  "<tr><td></td><td><input class='btn btn-primary btn-block' type='button' value='Add Location' onclick='saveData()'/></td></tr>";
 
-        markers[markers.length - 1]['infowin'] = new google.maps.InfoWindow({
-          content: html
-        });
+      markers[markers.length - 1]['infowin'] = new google.maps.InfoWindow({
+        content: html
+      });
 
 
-        google.maps.event.addListener(markers[markers.length - 1], 'click', function() {
-          activeWindow = this;
-          this['infowin'].open(map, this);
-        });
+      google.maps.event.addListener(markers[markers.length - 1], 'click', function() {
+        activeWindow = this;
+        this['infowin'].open(map, this);
+      });
       }
 
       function saveData() {
@@ -123,7 +120,7 @@ var html = "<h4>"+title+"</h4><table>" +
     </div>
 
     <div class="container">
-     <form class="form-signin" method="post" action="createRace.php">
+     <form class="form-signin" method="post" action="inc/createRace.php">
         <h2 class="form-signin-heading">Create a new Race</h2>
         <input type="text" class="form-control" name="event_name" placeholder="Race Name" autofocus>
         <input type="text" class="form-control" name="location" placeholder="Location" >

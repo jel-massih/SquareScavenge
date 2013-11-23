@@ -1,6 +1,6 @@
 <?php
   include('config.php');
-global $collection;
+  global $collection;
   $article = $collection->findOne(array('_id' => new MongoId($_GET['id'])));
   $players = $article['participants'];
 ?>
@@ -17,8 +17,8 @@ global $collection;
 
     <link href="css/bootstrap.css" rel="stylesheet">
 
-    <link href="starter-template.css" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
+    <link href="css/starter-template.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
   </head>
 
