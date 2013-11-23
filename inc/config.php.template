@@ -1,4 +1,8 @@
 <?php
+require_once "lib/couch.php";
+require_once "lib/couchClient.php";
+require_once "lib/couchDocument.php";
+
 $db_link = new MongoClient("MongoURL!");
 
 $db_link = $db_link->scavenger_hunt;
