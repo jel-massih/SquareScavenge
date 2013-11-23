@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Square Scavenge</title>
+
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <link href="starter-template.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <div class="container">
+      
+      <div class="jumbotron col-md-8">
+        <h1><? echo($_GET['event_name']); ?></h1>
+        <p><a class="btn btn-lg btn-success" href="launchRace.php?event_name=<?echo($_GET['event_name']);?>">LAUNCH THE RACE!</a></p>
+      </div>
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
