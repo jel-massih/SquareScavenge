@@ -13,6 +13,11 @@
  				$index = 0;
  				$bBroke = false;
  				$bWaitingForClue = false;
+ 				if($participant->raceIndex >= sizeof($row->value))
+ 				{
+ 					echo($participant->raceIndex);
+ 					die;
+ 				}
  				foreach($row->value as $checkpoint) {
  					if($bWaitingForClue) {
  						checkpointSuccess($index, $participant, $checkpoint->clue, $row->id);
@@ -32,10 +37,9 @@
 
  				if($bWaitingForClue) {
  					gameSuccess($participant, $row->id);
-					$collection->update(array('id' => $id), array('currentRanking' => $value['currentRanking'] += 1));
  					die();
  				} else if(!$bBroke) {
- 					wrongCheckpoint($participant['phonenumber']);
+ 					wrongCheckpoint($participant->phonenumber);
  					die();
  				}
  			}
@@ -67,8 +71,19 @@
 
  	function gameSuccess($participant, $docId) {
  		global $twilioClient;
+ 		global $TwilioNumber;
  		global $client;
  		$doc = $client->asCouchDocuments()->getDoc($docId);
+
+ 		$participants = $doc->participants;
+ 		foreach($participants as $docParticipant)
+ 		{
+ 			if($docParticipant->username == $participant->username) {
+ 				$docParticipant->raceIndex++;
+		 		$doc->participants = $participants;
+ 				break;
+ 			}
+ 		}
 
  		if($doc->currentRanking == 1) {
  			$doc->winner = $participant->username;
