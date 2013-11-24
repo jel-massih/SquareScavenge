@@ -11,7 +11,7 @@
  	}
 
  	$doc->participants = $participants;
-
+ 	$doc->started = true;
  	function giveFirstClue($number, $clue) {
  		$clue = urlencode($clue);
 		file_get_contents("http://jel-massih.com/SquareScavenge/inc/callHandler.php?phonenumber=".$number."&clue=".$clue);

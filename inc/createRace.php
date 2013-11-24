@@ -18,6 +18,7 @@ if(isset($_POST['event_name']) && isset($_POST['location']) && isset($_POST['pri
 	$doc->checkpoints = $goodcp;
 	$doc->currentRanking = 1;
 	$doc->winner = "";
+	$doc->started = false;
 
 	try {
 		$response = $client->storeDoc($doc);

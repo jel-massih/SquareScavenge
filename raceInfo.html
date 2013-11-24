@@ -45,12 +45,15 @@
     <div class="container">
       
       <div class="jumbotron col-md-8">
-        <h1><? echo($race->id); ?></h1>
+        <h1><? echo($race->_id); ?></h1>
         <ul style="margin-left:-40px">
           <li>Location: <?echo($race->location);?></li>
           <li>Prize: <?echo($race->prize);?></li>
         </ul>
+        <?
+         if($race->started == false) { ?>
         <p><a class="btn btn-lg btn-success" href="joinForm.html?race_id=<?echo($_GET['id']);?>">Join This Race</a></p>
+        <? } ?>
       </div>
 
         <div class="col-lg-3" style="width:200px; margin-left:auto;margin-right:auto;text-align:center;">
