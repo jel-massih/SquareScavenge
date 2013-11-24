@@ -19,10 +19,10 @@
   <body>
 
     <div class="container">
-     <form class="form-signin" method="post" action="joinRace.php">
+     <form class="form-signin" method="post" action="inc/joinRace.php">
         <h2 class="form-signin-heading">Please Fill in your Info</h2>
         <input type="text" class="form-control" name="foursquare_name" placeholder="Last Name on FourSquare" autofocus>
-        <input type="text" class="form-control" name="real_name" placeholder="Username" >
+        <input type="text" class="form-control" name="username" placeholder="Username" >
         <input type="text" class="form-control" name="phonenumber" placeholder="Phone Number">
         <input type="hidden" name="race_id" value="<?echo($_GET['race_id']);?>">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up!</button>
@@ -30,7 +30,7 @@
         <br/>
         <br/>
         <br/>
-        <p><a style="text-align:center" class="btn btn-lg btn-success" href="https://foursquare.com/oauth2/authenticate?client_id=QRCYFP0SDLG0MXGSNZOWWLUMAF2TIIM5HEFQIY4GYHPBAQX0&response_type=code&redirect_uri=http://jel-massih.com/TestingServer/LocTask/oauth.php">Authorize Foursquare Account!</a></p>
+        <p><a style="text-align:center" class="btn btn-lg btn-success" href="https://foursquare.com/oauth2/authenticate?client_id=QRCYFP0SDLG0MXGSNZOWWLUMAF2TIIM5HEFQIY4GYHPBAQX0&response_type=code&redirect_uri=http://jel-massih.com/SquareScavenge/joinForm.html?race_id=".$_GET['race_id']>Authorize Foursquare Account!</a></p>
       </form>
 
 

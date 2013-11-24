@@ -1,8 +1,6 @@
 <?php
-  include('config.php');
-  global $collection;
-  $article = $collection->findOne(array('_id' => new MongoId($_GET['id'])));
-  $players = $article['participants'];
+  include('inc/config.php');
+  $race = $client->asCouchDocuments()->getDoc($_GET['id']);
 ?>
 
 <!DOCTYPE html>
@@ -47,25 +45,25 @@
     <div class="container">
       
       <div class="jumbotron col-md-8">
-        <h1><? echo($article['event_name']); ?></h1>
+        <h1><? echo($race->id); ?></h1>
         <ul style="margin-left:-40px">
-          <li>Location: <?echo($article['location']);?></li>
-          <li>Prize: <?echo($article['prize']);?></li>
+          <li>Location: <?echo($race->location);?></li>
+          <li>Prize: <?echo($race->prize);?></li>
         </ul>
         <p><a class="btn btn-lg btn-success" href="joinForm.html?race_id=<?echo($_GET['id']);?>">Join This Race</a></p>
       </div>
 
         <div class="col-lg-3" style="width:200px; margin-left:auto;margin-right:auto;text-align:center;">
           <h2>Players</h2>
-          <? foreach($players as $id => $value) { ?>
-          <h4><?echo($value['real_name']);?></h4>
+          <? foreach($race->participants as $participant) {?>
+          <h4><?echo($participant->username);?></h4>
           <?}?>
         </div>
 
 
-        <? if($article['winner'] != "") {?>
+        <? if($race->winner != "") {?>
         <div class="col-lg-8" style=" margin-left:auto;margin-right:auto;text-align:center;">
-        <h2>Winner: <?echo($article['winner']);?></h2>
+        <h2>Winner: <?echo($race->winner);?></h2>
         </div>
 <?}?>
     </div><!-- /.container -->
