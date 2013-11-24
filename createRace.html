@@ -40,6 +40,9 @@
 
 
       google.maps.event.addListener(markers[markers.length - 1], 'click', function() {
+        if(activeWindow != null) {
+          activeWindow['infowin'].close();
+        }
         activeWindow = this;
         this['infowin'].open(map, this);
       });
@@ -57,24 +60,24 @@
 
 
       function updateMarkers(lat,lng) {
-        var ll = lat + "," + lng;    
+        var ll = lat + "," + lng; 
         for(var i=0;i<markers.length;i++) {
-        markers[i].setMap(null);
-      }
-      markers = [];
-      $.getJSON("https://api.foursquare.com/v2/venues/explore", {
-          ll: ll,
-          radius: 100,
-          limit: 10,
-          intent: "browse",
-          client_id: "QRCYFP0SDLG0MXGSNZOWWLUMAF2TIIM5HEFQIY4GYHPBAQX0",
-          client_secret: "MBUGOPDNIGAPDQNXTZQSS1N0SW45RZM1NS3QFLUIW3UKQ0ER",
-          v: 20130420
-       }).done(function(data) {
-          $.each(data.response.groups[0].items, function(i, item) {
-              addMarker(item.venue.location.lat, item.venue.location.lng, item.venue.name, item.venue.id);
-          });
-      });
+          markers[i].setMap(null);
+        }
+        markers = [];
+        $.getJSON("https://api.foursquare.com/v2/venues/explore", {
+            ll: ll,
+            radius: 100,
+            limit: 10,
+            intent: "browse",
+            client_id: "QRCYFP0SDLG0MXGSNZOWWLUMAF2TIIM5HEFQIY4GYHPBAQX0",
+            client_secret: "ZV3NOMMZ2G4BH5JGRKQ3POHZPBLTGNVPELMTKA05OAA15ZT4",
+            v: 20130420
+         }).done(function(data) {
+            $.each(data.response.groups[0].items, function(i, item) {
+                addMarker(item.venue.location.lat, item.venue.location.lng, item.venue.name, item.venue.id);
+            });
+        });
       }
 
       function initialize() {
@@ -85,13 +88,29 @@
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
         map = new google.maps.Map(map_canvas, map_options);
+        updateMarkers(40.728866, -73.995351);
         google.maps.event.addListener(map, 'click', function(e) {
           updateMarkers( e.latLng.lat().toFixed(6) , e.latLng.lng().toFixed(6));
         });
 
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(success, error);
+        } else {
+          alert('geolocation not supported');
+        }
 
-        updateMarkers(40.728866, -73.995351);
       }
+
+      function success(position) {
+        map.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+        updateMarkers(position.coords.latitude, position.coords.longitude);
+        console.log("Success! " + position.coords.latitude + " _ " + position.coords.longitude);
+      }
+
+      function error(msg) {
+        console.log("Error!");
+      }
+
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
 
@@ -130,10 +149,7 @@
       </form>
 
       <div id="map_canvas">
-        
-
       </div>
-
     </div><!-- /.container -->
 
     <script src="js/bootstrap.min.js"></script>

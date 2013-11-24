@@ -2,9 +2,6 @@
 	require "Services/Twilio.php";
 	include_once "config.php";
 
-	global $AccountSid;
-	global $AuthToken;
-	global $TwilioNumber;
 	$client = new Services_Twilio($AccountSid, $AuthToken);
 	$_GET['clue'] = urlencode($_GET['clue']);
 	try {
