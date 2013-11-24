@@ -1,3 +1,12 @@
+<?php
+  require('inc/config.php');
+  try {
+    $doc = $client->getDoc($_GET['event_name']);
+  } catch(exception $e) {
+    header("Location: index.html");
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,11 +25,10 @@
   </head>
 
   <body>
-
     <div class="container">
       
       <div class="jumbotron col-md-8">
-        <h1><? echo($_GET['event_name']); ?></h1>
+        <h1><? echo($_GET['event_name']); ?></h1><br>
         <p><a class="btn btn-lg btn-success" href="inc/launchRace.php?event_name=<?echo($_GET['event_name']);?>">LAUNCH THE RACE!</a></p>
       </div>
     </div><!-- /.container -->
